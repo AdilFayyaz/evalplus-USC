@@ -7,6 +7,7 @@ from typing import Dict, Iterable
 import tempdir
 import wget
 from appdirs import user_cache_dir
+import requests
 
 CACHE_DIR = user_cache_dir("evalplus")
 
@@ -24,17 +25,19 @@ def get_dataset_metadata(name: str, version: str, mini: bool, noextreme: bool = 
     return url, cache_path
 
 
-def make_cache(gzip_url, cache_path):
+def make_cache(gzip_url, cache_path, save_dir = "data.jsonl.gz"):
+
     # Check if human eval file exists in CACHE_DIR
     if not os.path.exists(cache_path):
         # Install HumanEval dataset and parse as jsonl
         print(f"Downloading dataset from {gzip_url}")
         with tempdir.TempDir() as tmpdir:
-            plus_gz_path = os.path.join(tmpdir, f"data.jsonl.gz")
+            plus_gz_path = os.path.join(tmpdir, save_dir)
             wget.download(gzip_url, plus_gz_path)
 
             with gzip.open(plus_gz_path, "rb") as f:
                 plus = f.read().decode("utf-8")
+               
 
         # create CACHE_DIR if not exists
         if not os.path.exists(CACHE_DIR):
