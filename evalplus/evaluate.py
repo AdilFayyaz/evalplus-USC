@@ -21,6 +21,9 @@ from evalplus.data import (
     get_mbpp_plus,
     get_mbpp_plus_hash,
     load_solutions,
+    get_human_eval_x_plus,
+    get_human_eval_x_plus_hash,
+    
 )
 from evalplus.data.mbpp import mbpp_serialize_inputs
 from evalplus.data.utils import CACHE_DIR
@@ -146,6 +149,12 @@ def evaluate(flags):
         if flags.dataset == "humaneval":
             problems = get_human_eval_plus(mini=flags.mini, noextreme=flags.noextreme)
             dataset_hash = get_human_eval_plus_hash(
+                mini=flags.mini, noextreme=flags.noextreme
+            )
+            expected_output = get_groundtruth(problems, dataset_hash, [])
+        elif flags.dataset == "humanevalx":
+            problems = get_human_eval_x_plus(mini=flags.mini, noextreme=flags.noextreme)
+            dataset_hash = get_human_eval_x_plus_hash(
                 mini=flags.mini, noextreme=flags.noextreme
             )
             expected_output = get_groundtruth(problems, dataset_hash, [])
@@ -327,7 +336,7 @@ def evaluate(flags):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--dataset", required=True, type=str, choices=["humaneval", "mbpp"]
+        "--dataset", required=True, type=str, choices=["humaneval", "mbpp", "humanevalx"]
     )
     parser.add_argument("--samples", required=True, type=str)
     parser.add_argument("--base-only", action="store_true")
