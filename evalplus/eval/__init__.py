@@ -29,8 +29,8 @@ from typing import Any, Dict, List, Tuple, Union
 
 import numpy as np
 
-from evalplus.eval._special_oracle import MBPP_OUTPUT_NOT_NONE_TASKS, _poly
-from evalplus.eval.utils import (
+from eval._special_oracle import MBPP_OUTPUT_NOT_NONE_TASKS, _poly
+from eval.utils import (
     create_tempdir,
     reliability_guard,
     swallow_io,

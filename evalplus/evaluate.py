@@ -15,27 +15,27 @@ import numpy as np
 from termcolor import cprint
 from tqdm import tqdm
 
-from evalplus.data import (
+from data import (
+    get_human_eval_x_plus,
+    get_human_eval_x_plus_hash,
     get_human_eval_plus,
     get_human_eval_plus_hash,
     get_mbpp_plus,
     get_mbpp_plus_hash,
-    load_solutions,
-    get_human_eval_x_plus,
-    get_human_eval_x_plus_hash,
+    load_solutions
     
 )
-from evalplus.data.mbpp import mbpp_serialize_inputs
-from evalplus.data.utils import CACHE_DIR
-from evalplus.eval import (
+from data.mbpp import mbpp_serialize_inputs
+from data.utils import CACHE_DIR
+from eval import (
     FAIL,
     PASS,
     compatible_eval_result,
     estimate_pass_at_k,
     untrusted_check,
 )
-from evalplus.eval._special_oracle import MBPP_OUTPUT_NOT_NONE_TASKS
-from evalplus.gen.util import trusted_exec
+from eval._special_oracle import MBPP_OUTPUT_NOT_NONE_TASKS
+from gen.util import trusted_exec
 
 # 1st item: the status
 # 2nd item (optional): the detailed pass/fail boolean for each input

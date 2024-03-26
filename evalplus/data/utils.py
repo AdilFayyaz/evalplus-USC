@@ -20,7 +20,8 @@ def get_dataset_metadata(name: str, version: str, mini: bool, noextreme: bool = 
         extra = "-Mini"
     if noextreme:
         extra = "-NoExtreme"
-    url = f"https://github.com/evalplus/{name.lower()}_release/releases/download/{version}/{name}{extra}.jsonl.gz"
+        
+    url = f"https://raw.githubusercontent.com/THUDM/CodeGeeX/main/codegeex/benchmark/humaneval-x/{name.lower}/data/humaneval_{name.lower}.jsonl.gz"
     cache_path = os.path.join(CACHE_DIR, f"{name}{extra}-{version}.jsonl")
     return url, cache_path
 

@@ -3,7 +3,7 @@ import json
 import os
 from typing import Dict
 
-from evalplus.data.utils import (
+from data.utils import (
     CACHE_DIR,
     completeness_check,
     get_dataset_metadata,
@@ -105,9 +105,9 @@ def get_human_eval_x(language='python') -> Dict[str, Dict]:
 # Test all the languages 
 
 
-# languages = ['cpp', 'python', 'go', 'java', 'js']
-# for language in languages: 
-#     data = get_human_eval_x(language)
+languages = ['cpp', 'python', 'go', 'java', 'js']
+for language in languages: 
+    data = get_human_eval_x(language)
 
 
 

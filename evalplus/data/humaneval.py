@@ -3,7 +3,7 @@ import json
 import os
 from typing import Dict
 
-from evalplus.data.utils import (
+from data.utils import (
     CACHE_DIR,
     completeness_check,
     get_dataset_metadata,
