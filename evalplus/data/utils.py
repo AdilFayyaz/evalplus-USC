@@ -13,7 +13,7 @@ CACHE_DIR = user_cache_dir("evalplus")
 
 
 def get_dataset_metadata(name: str, version: str, mini: bool, noextreme: bool = False):
-    assert name in ["HumanEvalPlus", "MbppPlus"], f"Unknown/unsupported dataset: {name}"
+    assert name in ["HumanEvalPlus", "MbppPlus", "python"], f"Unknown/unsupported dataset: {name}"
     extra = ""
     assert not (mini and noextreme), "Cannot have both mini and noextreme"
     if mini:
@@ -21,7 +21,7 @@ def get_dataset_metadata(name: str, version: str, mini: bool, noextreme: bool = 
     if noextreme:
         extra = "-NoExtreme"
         
-    url = f"https://raw.githubusercontent.com/THUDM/CodeGeeX/main/codegeex/benchmark/humaneval-x/{name.lower}/data/humaneval_{name.lower}.jsonl.gz"
+    url = f"https://raw.githubusercontent.com/THUDM/CodeGeeX/main/codegeex/benchmark/humaneval-x/{name.lower()}/data/humaneval_{name.lower()}.jsonl.gz"
     cache_path = os.path.join(CACHE_DIR, f"{name}{extra}-{version}.jsonl")
     return url, cache_path
 

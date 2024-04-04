@@ -27,10 +27,12 @@ HUMANEVAL_OVERRIDE_PATH = os.environ.get("HUMANEVAL_OVERRIDE_PATH", None)
 def _ready_human_eval_x_plus_path(mini=False, noextreme=False) -> str:
     if HUMANEVAL_OVERRIDE_PATH:
         return HUMANEVAL_OVERRIDE_PATH
-
+    language = 'python'
     url, plus_path = get_dataset_metadata(
-        "HumanEvalPlus", HUMANEVAL_PLUS_VERSION, mini, noextreme
+        "python", HUMANEVAL_PLUS_VERSION, mini, noextreme
     )
+    print("Getting the data: ", url)
+    print("Path: ", plus_path)
     make_cache(url, plus_path)
 
     return plus_path
@@ -67,6 +69,9 @@ def get_human_eval_x_plus(
     """
     plus_path = _ready_human_eval_x_plus_path(mini=mini, noextreme=noextreme)
     plus = {task["task_id"]: task for task in stream_jsonl(plus_path)}
+    for task_id, task in plus.items():
+        print(task)
+        break
     if err_incomplete:
         completeness_check("HumanEvalX+", plus)
     return plus
